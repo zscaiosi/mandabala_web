@@ -1,5 +1,5 @@
-##Refatoraçãd do mandabala dashboard.
-Siga as instruções create-react-app para contribuir com este projeto:
+## Refatoraçãd do mandabala dashboard.
+- Siga as instruções create-react-app para contribuir com este projeto:
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
