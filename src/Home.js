@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Login from './components/LoginComponent';
-import CadastroCliente from './components/CadastroClienteComponent';
+import Login from './components/acesso/LoginComponent';
+import CadastroCliente from './components/acesso/CadastroClienteComponent';
 
 class Home extends React.Component {
 	constructor(props){
@@ -18,6 +18,7 @@ class Home extends React.Component {
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/cadastrarCliente" component={CadastroCliente} />
+						
 					</Switch>
 			);
 	}
