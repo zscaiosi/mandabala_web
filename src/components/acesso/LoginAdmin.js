@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
 import {postLoginAdminRequest} from '../../actions/adminActions';
+import {Redirect} from 'react-router-dom';
+
 
 const LoginDiv = styled.div`
   display: flex;
@@ -90,17 +92,11 @@ class LoginAdmin extends React.Component {
             ENTRAR
           </EnterButton>
 
+          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard"/> : null}
+
         </LoginDiv>
       </div>
     );
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    postRequest: () => {
-      dispatch(postLoginAdminRequest(this.state))
-    }
   }
 }
 
