@@ -31,7 +31,7 @@ export const admin = (state = ADMIN_STATE, action) => {
         ...state,
         isPostingLoginAdmin: false,
         postLoginAdminSuccess: null,
-        postLoginAdminError: action.res
+        postLoginAdminError: action.err
       }
     default:
       return{
