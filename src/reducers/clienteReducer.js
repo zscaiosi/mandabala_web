@@ -31,7 +31,7 @@ export const cliente = (state = CLIENTE_STATE, action) => {
         ...state,
         isPostingCliente: false,
         postClienteSuccess: null,
-        postClienteError: action.reponse
+        postClienteError: action.response
       }
     default:
       return{

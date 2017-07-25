@@ -1,12 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
+import InputField from '../helpers/InputFieldComponent';
+import {postLoginAdminRequest} from '../../actions/adminActions';
 
 const LoginDiv = styled.div`
   display: flex;
+  flex-direction: column;
   width: 300px;
-  height: 400px;
+  height: auto;
+  border: solid 1px purple;
 `
 
 const EnterButton = styled.button`
@@ -16,6 +19,10 @@ const EnterButton = styled.button`
   color: white;
   font-size: 20px;
   font-weight: 350;
+  background-color: purple;
+  border: solid 1px purple;
+  margin: 10px;
+  cursor: pointer;
 `
 
 class LoginAdmin extends React.Component {
@@ -31,13 +38,27 @@ class LoginAdmin extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    if( this.props.isPostingLoginAdmin === true && nextProps.postLoginAdminSuccess !== null ){
+      console.log('success', nextProps.postLoginAdminSuccess);
+    }
+
+    if( nextProps.postLoginAdminError !== null ){
+      console.log('error', nextProps.postLoginAdminError)
+    }
+  }
+
   handleSubmit(e){
     e.preventDefault();
+
+    this.props.postLoginAdminRequest(this.state);
   }
 
   handleChange(e){
     let name = e.target.name;
     let value = e.target.value;
+
+    console.log('name', name, 'value', value)
 
     this.setState({
       [name] : value
@@ -45,6 +66,7 @@ class LoginAdmin extends React.Component {
   } 
 
   render(){
+    console.log('func', typeof postLoginAdminRequest);
     return(
       <div>
         <LoginDiv>
@@ -64,7 +86,7 @@ class LoginAdmin extends React.Component {
             onChange={(e) => this.handleChange(e)}
           />
 
-          <EnterButton>
+          <EnterButton onClick={(e) => this.handleSubmit(e)}>
             ENTRAR
           </EnterButton>
 
@@ -74,4 +96,20 @@ class LoginAdmin extends React.Component {
   }
 }
 
-export default LoginAdmin;
+const mapDispatchToProps = dispatch => {
+  return {
+    postRequest: () => {
+      dispatch(postLoginAdminRequest(this.state))
+    }
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isPostingLoginAdmin: state.admin.isPostingLoginAdmin,
+    postLoginAdminSuccess: state.admin.postLoginAdminSuccess,
+    postLoginAdminError: state.postLoginAdminError
+  }
+}
+
+export default connect(mapStateToProps, { postLoginAdminRequest })(LoginAdmin);

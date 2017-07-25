@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Login from './components/acesso/LoginComponent';
 import CadastroCliente from './components/acesso/CadastroClienteComponent';
+import LoginAdmin from './components/acesso/LoginAdmin';
 
 class Home extends React.Component {
 	constructor(props){
@@ -18,7 +19,7 @@ class Home extends React.Component {
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route path="/cadastrarCliente" component={CadastroCliente} />
-						
+						<Route path="/loginAdmin" component={LoginAdmin} />
 					</Switch>
 			);
 	}
