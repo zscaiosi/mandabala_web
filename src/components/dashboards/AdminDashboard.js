@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import Principal from './Principal';
 import Header from '../helpers/Header';
+import Clientes from './Clientes';
 
 class AdminDashboard extends Component {
 
@@ -11,7 +12,8 @@ class AdminDashboard extends Component {
         <Header />
         <Switch >
           <Route exact path="/dashboard/admin/principal" component={Principal} />
-        </Switch>         
+          <Route exact path="/dashboard/admin/clientes" component={Clientes} />
+        </Switch>
       </div>
     );
   }

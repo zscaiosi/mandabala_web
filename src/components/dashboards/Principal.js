@@ -44,7 +44,7 @@ class Principal extends Component {
           <b>1</b>
         </BoxSection>
         <BoxSection>
-         <Link to="/dashboard/admin/clientes" > <b>1</b> </Link>
+         <Link to="/dashboard/admin/clientes" > <b>Clientes</b> </Link>
         </BoxSection>
       </FullContainerSection>
     );

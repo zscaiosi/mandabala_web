@@ -92,7 +92,7 @@ class LoginAdmin extends React.Component {
             ENTRAR
           </EnterButton>
 
-          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/admin"/> : null}
+          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/admin/principal"/> : null}
 
         </LoginDiv>
       </div>
