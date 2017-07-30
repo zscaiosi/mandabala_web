@@ -64,6 +64,7 @@ class Clientes extends Component {
                 <div key={cliente._id} style={{display: 'flex', flexDirection: 'row'}} >
                   <div style={{display: 'flex', flexDirection: 'column'}}>Nome: <b>{cliente.nome}</b> </div>
                   <div style={{display: 'flex', flexDirection: 'column'}}>Maquinas: <b>{cliente.maquinas.length}</b> </div>
+                  <div style={{display: 'flex', flexDirection: 'column'}}>Maquinas: <b>{cliente.faturamento}</b> </div>
                 </div>
               );
             }) : null
