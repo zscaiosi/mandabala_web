@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import Principal from './Principal';
 import Header from '../helpers/Header';
 import Clientes from './Clientes';
+import AtualizarCliente from './AtualizarClienteComponent';
 
 class AdminDashboard extends Component {
 
@@ -13,6 +14,7 @@ class AdminDashboard extends Component {
         <Switch >
           <Route exact path="/dashboard/admin/principal" component={Principal} />
           <Route exact path="/dashboard/admin/clientes" component={Clientes} />
+          <Route exact path="/dashboard/admin/clientes/atualizacao" component={AtualizarCliente} />
         </Switch>
       </div>
     );

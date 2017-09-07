@@ -27,6 +27,17 @@ const EnterButton = styled.button`
   cursor: pointer;
 `
 
+const BadRequestArticle = styled.article`
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  background-color: rgba(255, 100, 150, 0.6);
+  font-size: 16px;
+  color: red;
+  font-weight: 400;
+  border: 0px;
+`
+
 class LoginAdmin extends React.Component {
   constructor(props){
     super(props);
@@ -53,7 +64,7 @@ class LoginAdmin extends React.Component {
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.postLoginAdminRequest(this.state);
+    this.props.postLoginAdminRequest({email: this.state.email, password: this.state.password});
   }
 
   handleChange(e){
@@ -89,11 +100,10 @@ class LoginAdmin extends React.Component {
           />
 
           <EnterButton onClick={(e) => this.handleSubmit(e)}>
-            ENTRAR
+            { this.props.isPostingLoginAdmin === true ? "AGUARDE..." : "ENTRAR" }
           </EnterButton>
-
+          { this.props.postLoginAdminError !== null ? <BadRequestArticle>Erro ao logar-se, tente novamente.</BadRequestArticle> : null }
           { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/admin/principal"/> : null}
-
         </LoginDiv>
       </div>
     );

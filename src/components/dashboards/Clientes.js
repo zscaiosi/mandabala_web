@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {getClienteRequest} from '../../actions/clienteActions';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 const FullSection = styled.section`
   display: flex;
@@ -19,6 +20,12 @@ const ClienteRowSection = styled.section`
   border: solid 1px purple;
   width: 100%;
   height: 100%;
+`
+
+const ActionsSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 `
 
 class Clientes extends Component {
@@ -56,20 +63,24 @@ class Clientes extends Component {
   render(){
     return(
       <FullSection>
-        <ClienteRowSection>
+        
           {
             this.props.getClienteSucces !== null ? 
             this.props.getClienteSucces.data.data.map( (cliente, i) => {
               return(
-                <div key={cliente._id} style={{display: 'flex', flexDirection: 'row'}} >
+                <ClienteRowSection key={cliente._id}>
                   <div style={{display: 'flex', flexDirection: 'column'}}>Nome: <b>{cliente.nome}</b> </div>
                   <div style={{display: 'flex', flexDirection: 'column'}}>Maquinas: <b>{cliente.maquinas.length}</b> </div>
                   <div style={{display: 'flex', flexDirection: 'column'}}>Maquinas: <b>{cliente.faturamento}</b> </div>
-                </div>
+                  <ActionsSection>
+                    <Link path="/dashboard/admin/clientes/atualizacao"> Atualizar </Link>
+                    {/* <Link path="/dashboard/admin/clientes/exclusao"> Excluir </Link> */}
+                  </ActionsSection>
+                </ClienteRowSection>
               );
             }) : null
           }
-        </ClienteRowSection>
+        
         <ClienteRowSection>
           <div>Nome</div><div>Responsável</div><div>Produtos</div><div>Faturamento Total</div>
         </ClienteRowSection>

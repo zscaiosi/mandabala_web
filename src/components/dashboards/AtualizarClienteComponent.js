@@ -72,7 +72,7 @@ class AtualizarCliente extends React.Component {
     this.setState({
       ...this.state,
       formData: {
-        ...formData,
+        ...this.state.formData,
         [name] : value
       }
     });
@@ -87,12 +87,11 @@ class AtualizarCliente extends React.Component {
       } else {
         return
       }
-
-      console.log("PAYLOAD: ",payload);
-
-      putAtualizarClienteRequest(payload);
-
     });
+
+    console.log("PAYLOAD: ", payload);
+
+    this.putAtualizarClienteRequest(payload);
   }
 
   render(){
