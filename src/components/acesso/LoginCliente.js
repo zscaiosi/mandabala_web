@@ -6,14 +6,6 @@ import {postLoginClienteRequest} from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
 
 
-const LoginDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: auto;
-  border: solid 1px purple;
-`
-
 const EnterButton = styled.button`
   display: flex;
   width: 100%;
@@ -32,7 +24,7 @@ class LoginCliente extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
+      username: '',
       password: ''
     }
 
@@ -70,13 +62,13 @@ class LoginCliente extends React.Component {
   render(){
     console.log('func', this.props);
     return(
-      <div>
-        <LoginDiv>
+      <section className="row-section">
+        <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="Email:"
-            name="email"
-            value={this.state.email}
+            fieldName="Username:"
+            name="username"
+            value={this.state.username}
             onChange={(e) => this.handleChange(e)}
           />
 
@@ -88,14 +80,16 @@ class LoginCliente extends React.Component {
             onChange={(e) => this.handleChange(e)}
           />
 
-          <EnterButton onClick={(e) => this.handleSubmit(e)}>
-            ENTRAR
-          </EnterButton>
+          <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
+            <button onClick={(e) => this.handleSubmit(e)}>
+              { this.props.isPostingLoginCliente ? "Aguarde..." : "ENTRAR" }
+            </button>       
+          </span>
 
           { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
 
-        </LoginDiv>
-      </div>
+        </div>
+      </section>
     );
   }
 }

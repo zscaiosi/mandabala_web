@@ -2,17 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
-import {postLoginAdminRequest} from '../../actions/adminActions';
+import {postLoginClienteRequest} from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
 
-
-const LoginDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: auto;
-  border: solid 1px purple;
-`
 
 const EnterButton = styled.button`
   display: flex;
@@ -27,23 +19,12 @@ const EnterButton = styled.button`
   cursor: pointer;
 `
 
-const BadRequestArticle = styled.article`
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  background-color: rgba(255, 100, 150, 0.6);
-  font-size: 16px;
-  color: red;
-  font-weight: 400;
-  border: 0px;
-`
-
-class LoginAdmin extends React.Component {
+class LoginOperador extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      email: '',
+      username: '',
       password: ''
     }
 
@@ -52,19 +33,19 @@ class LoginAdmin extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if( this.props.isPostingLoginAdmin === true && nextProps.postLoginAdminSuccess !== null ){
-      console.log('success', nextProps.postLoginAdminSuccess);
+    if( this.props.isPostingLoginCliente === true && nextProps.postLoginClienteSuccess !== null ){
+      console.log('success', nextProps.postLoginClienteSuccess);
     }
 
-    if( nextProps.postLoginAdminError !== null ){
-      console.log('error', nextProps.postLoginAdminError)
+    if( nextProps.postLoginClienteError !== null ){
+      console.log('error', nextProps.postLoginClienteError)
     }
   }
 
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.postLoginAdminRequest({email: this.state.email, password: this.state.password});
+    this.props.postLoginClienteRequest(this.state);
   }
 
   handleChange(e){
@@ -79,7 +60,7 @@ class LoginAdmin extends React.Component {
   } 
 
   render(){
-    console.log('func', typeof postLoginAdminRequest);
+    console.log('func', this.props);
     return(
       <section className="row-section">
         <div className="panel panel-login">
@@ -101,11 +82,11 @@ class LoginAdmin extends React.Component {
 
           <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
             <button onClick={(e) => this.handleSubmit(e)}>
-              { this.props.isPostingLoginAdmin ? "Aguarde..." : "ENTRAR" }
-            </button>            
+              { this.props.isPostingLoginCliente ? "Aguarde..." : "ENTRAR" }
+            </button>       
           </span>
 
-          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
+          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
 
         </div>
       </section>
@@ -115,10 +96,10 @@ class LoginAdmin extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isPostingLoginAdmin: state.admin.isPostingLoginAdmin,
-    postLoginAdminSuccess: state.admin.postLoginAdminSuccess,
-    postLoginAdminError: state.admin.postLoginAdminError
+    isPostingLoginCliente: state.cliente.isPostingLoginCliente,
+    postLoginClienteSuccess: state.cliente.postLoginClienteSuccess,
+    postLoginClienteError: state.cliente.postLoginClienteError
   }
 }
 
-export default connect(mapStateToProps, { postLoginAdminRequest })(LoginAdmin);
+export default connect(mapStateToProps, { postLoginClienteRequest })(LoginOperador);

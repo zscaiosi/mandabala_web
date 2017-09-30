@@ -9,6 +9,10 @@ export const GET_CLIENTE = 'GET_CLIENTE';
 export const GET_CLIENTE_SUCCESS = 'GET_CLIENTE_SUCCESS';
 export const GET_CLIENTE_ERROR = 'GET_CLIENTE_ERROR';
 
+export const POST_CADASTRO = 'POST_CADASTRO';
+export const POST_CADASTRO_SUCCESS = 'POST_CADASTRO_SUCCESS';
+export const POST_CADASTRO_ERROR = 'POST_CADASTRO_ERROR';
+
 const postLoginCliente = () => {
   return {
     type: POST_LOGIN_CLIENTE
@@ -36,7 +40,7 @@ export const postLoginClienteRequest = (payload) => {
     }
   });
 
-  const request = instance.post(`${api.url}${api.port}/clientes/login`);
+  const request = instance.post(`${api.url}/clientes/login`, payload);
 
   return dispatch => {
     dispatch(postLoginCliente());
@@ -97,4 +101,44 @@ export const getClienteRequest = (id=null) => {
     });
   }
 
+}
+
+const postCadastro = () => {
+  return {
+    type: POST_CADASTRO
+  }
+}
+
+const postCadastroSuccess = (response) => {
+  return {
+    type: POST_CADASTRO_SUCCESS,
+    response
+  }
+}
+
+const postCadastroError = (error) => {
+  return {
+    type: POST_CADASTRO_ERROR,
+    error
+  }
+}
+
+export const postCadastroRequest = (payload) => {
+  const instance = axios.create({
+    headers: {
+      "Content-Type" : "application/json"
+    }
+  });
+
+  return (dispatch) => {
+    dispatch(postCadastro());
+
+    return instance.post(`${api.url}/clientes/cadastrar`, payload)
+      .then( (response) => {
+        dispatch(postCadastroSuccess(response));
+      })
+      .catch( (error) => {
+        dispatch(postCadastroError(error));
+      });
+  }
 }
