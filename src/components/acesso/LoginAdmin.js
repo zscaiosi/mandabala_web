@@ -56,8 +56,9 @@ class LoginAdmin extends React.Component {
       console.log('success', nextProps.postLoginAdminSuccess);
     }
 
-    if( nextProps.postLoginAdminError !== null ){
-      console.log('error', nextProps.postLoginAdminError)
+    if( this.props.isPostingLoginAdmin === true && nextProps.postLoginAdminError !== null ){
+      console.log('error', nextProps.postLoginAdminError);
+      alert("Login ou senha inválidos!");
     }
   }
 
@@ -85,9 +86,9 @@ class LoginAdmin extends React.Component {
         <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="Username:"
-            name="username"
-            value={this.state.username}
+            fieldName="E-mail:"
+            name="email"
+            value={this.state.email}
             onChange={(e) => this.handleChange(e)}
           />
 
@@ -100,12 +101,12 @@ class LoginAdmin extends React.Component {
           />
 
           <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
-            <button onClick={(e) => this.handleSubmit(e)}>
+            <button onClick={(e) => this.handleSubmit(e)} disabled={this.props.isPostingLoginAdmin} >
               { this.props.isPostingLoginAdmin ? "Aguarde..." : "ENTRAR" }
-            </button>            
+            </button>
           </span>
 
-          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
+          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/admin/principal" /> : null }
 
         </div>
       </section>

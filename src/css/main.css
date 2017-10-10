@@ -92,15 +92,18 @@ html{
   .panel-login button{
     width: 100%;
     height: auto;
-    border: 0px solid;
+    border: 0.5px solid purple;
     max-width: 300px;
     color: purple;
     border-radius: 5px;
-    background-color: rgba(112,128,144 0.1);
+    background-color: white;
+    padding: 5px;    
+    margin-bottom: 10px;
   }
   .panel-login button:hover{
     cursor: pointer;
     background-color: purple;
+    border: 0.5px solid white;    
     color: white;
   }
   /* CADASTRO STYLE */
@@ -121,12 +124,90 @@ html{
     max-width: 300px;
     color: #8B008B;
     border-radius: 5px;
-    background-color: rgba(139,0,139, 0.3);
+    background-color: white;
     padding: 10px;
   }
   .panel-cadastro button:hover{
     cursor: pointer;
     background-color: #8B008B;
+    color: white;
+  }   
+
+  .clickable-button{
+    width: 100%;
+    height: 100%;
+    border: 0px solid;
+    max-width: 300px;
+    color: #8B008B;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+  }
+  .clickable-button:hover{
+    cursor: pointer;
+    background-color: #8B008B;
+    color: white;
+  }    
+
+  a.link{
+    display: flex;
+    font-size: 18px;
+  }
+
+  .col-3{
+    display: flex;
+    width: 25%;
+    margin: 1px;    
+  }
+
+  .col-6{
+    display: flex;
+    width: 50%;
+    margin: 1px;
+  }
+
+  .col-12{
+    display: flex;
+    width: 100%;
+    margin: 1px;    
+  }
+
+  .row-center{
+    flex-direction: row;
+    justify-content: center;    
+  }
+
+  #header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 150px;
+    background-color: rgba(128,0,128, 0.5);
+  }
+
+  .nav-btn{
+    width: 200px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: solid 0.5px white;
+    color: white;
+    border-radius: 30px;
+  }
+  .nav-btn:hover, .nav-btn:hover a{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+  .nav-btn a{
+    font-size: 15px;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
     color: white;
   }   
   /* FIM DO MEDIA QUERY */ 

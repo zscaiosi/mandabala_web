@@ -1,7 +1,7 @@
 import React from 'react';
-import InputField from '../helpers/InputFieldComponent';
+import InputField from '../../helpers/InputFieldComponent';
 import {connect} from 'react-redux';
-import {postCadastroRequest} from '../../actions/clienteActions';
+import {postCadastroRequest} from '../../../actions/clienteActions';
 import moment from 'moment';
 import {Redirect} from 'react-router-dom';
 
@@ -35,6 +35,13 @@ class CadastroCliente extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if( this.props.isPostingCadastro === true && nextProps.postCadastroSuccess !== null ){
+      console.log("NEXT", nextProps.postCadastroSuccess);
+      alert("Enviado com sucesso!");
+    }
   }
 
   handleChange(e){
@@ -234,11 +241,10 @@ class CadastroCliente extends React.Component {
           />  
           <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
             <button onClick={this.handleSubmit} >
-              Cadastrar
+              { this.props.isPostingCadastro ? "Enviando..." : "Cadastrar" }
             </button>
           </span>
         </div>
-        { this.props.postCadastroSuccess !== null ? <Redirect push to="/loginCliente" /> : null }
       </section>
     );
   }

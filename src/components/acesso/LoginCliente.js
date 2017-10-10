@@ -24,7 +24,7 @@ class LoginCliente extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
 
@@ -37,8 +37,9 @@ class LoginCliente extends React.Component {
       console.log('success', nextProps.postLoginClienteSuccess);
     }
 
-    if( nextProps.postLoginClienteError !== null ){
+    if( this.props.isPostingLoginCliente === true && nextProps.postLoginClienteError !== null ){
       console.log('error', nextProps.postLoginClienteError)
+      alert("Login ou senha inválidos!");
     }
   }
 
@@ -66,9 +67,9 @@ class LoginCliente extends React.Component {
         <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="Username:"
-            name="username"
-            value={this.state.username}
+            fieldName="E-mail:"
+            name="email"
+            value={this.state.email}
             onChange={(e) => this.handleChange(e)}
           />
 

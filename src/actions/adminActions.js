@@ -33,7 +33,7 @@ export const postLoginAdminRequest = (payload) => {
     }
   });
 
-  const request = instance.post(`${api.url}${api.port}/admins/login`, payload);
+  const request = instance.post(`${api.localhost}${api.port}/admins/login`, payload);
 
   return dispatch => {
     dispatch(postLoginAdmin());

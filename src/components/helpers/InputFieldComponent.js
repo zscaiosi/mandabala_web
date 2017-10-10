@@ -75,7 +75,7 @@ class InputField extends Component {
 			return (
 				<FieldWraper>
 					<label htmlFor={this.props.name} > {this.props.fieldName} </label>
-					<input id={this.props.name} name={this.props.name} type="date" value={this.props.value} onChange={this.props.onChange} />
+					<input id={this.props.name} lang="pt-br" name={this.props.name} type="date" value={this.props.value} onChange={this.props.onChange} />
 				</FieldWraper>
 			);
 		}

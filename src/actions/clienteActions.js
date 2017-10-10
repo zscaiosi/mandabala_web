@@ -40,8 +40,8 @@ export const postLoginClienteRequest = (payload) => {
     }
   });
 
-  const request = instance.post(`${api.url}/clientes/login`, payload);
-
+ // const request = instance.post(`${api.url}/clientes/login`, payload);
+  const request = instance.post(`http://localhost:8585/clientes/login`, payload);
   return dispatch => {
     dispatch(postLoginCliente());
 
@@ -85,9 +85,9 @@ export const getClienteRequest = (id=null) => {
   let request = null;
 
   if( id !== null ){
-    request = instance.get(`${api.url}${api.port}/clientes/encontrar?id=${id}`);
+    request = instance.get(`${api.localhost}${api.port}/clientes/encontrar?_id=${id}`);
   }else{
-    request = instance.get(`${api.url}${api.port}/clientes/listar`);
+    request = instance.get(`${api.localhost}${api.port}/clientes/listar`);
   }
 
 
@@ -95,8 +95,10 @@ export const getClienteRequest = (id=null) => {
     dispatch(getCliente());
 
     return request.then( (response) => {
-      dispatch(getClienteSuccess(response));
+      console.log("response", response)
+      dispatch(getClienteSuccess(response.data));
     }).catch( (error) => {
+      console.log("error", error)
       dispatch(getClienteError(error));
     });
   }

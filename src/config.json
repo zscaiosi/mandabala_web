@@ -2,6 +2,6 @@
   "api" : {
     "url": "http://ec2-54-197-172-138.compute-1.amazonaws.com",
     "localhost": "http://localhost",
-    "port": ":8581"
+    "port": ":8585"
   }
 }
