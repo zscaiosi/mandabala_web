@@ -1,23 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
 import {postLoginClienteRequest} from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
-
-
-const EnterButton = styled.button`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 350;
-  background-color: purple;
-  border: solid 1px purple;
-  margin: 10px;
-  cursor: pointer;
-`
 
 class LoginCliente extends React.Component {
   constructor(props){
@@ -87,7 +73,7 @@ class LoginCliente extends React.Component {
             </button>       
           </span>
 
-          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
+          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente/principal" /> : null }
 
         </div>
       </section>

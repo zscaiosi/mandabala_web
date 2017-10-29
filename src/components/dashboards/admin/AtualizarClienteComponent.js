@@ -69,31 +69,37 @@ class AtualizarCliente extends React.Component {
     if( this.props.getClienteSuccess ){
       const item = this.props.getClienteSuccess.results.find( (element) => element._id === this.props.match.params._id );
   
-      this.setState({
-        "nr_maquinas": item.nr_maquinas,
-        payload: {
-          ...this.state.payload,
-          "_id": this.props.match.params._id,
-          "razao_social": item.razao_social,
-          "cnpj": item.cnpj,
-          "email": item.email,
-          "password": item.password,
-          "cpf": item.cpf,
-          "responsavel": item.responsavel,
-          "endereco": item.endereco,
-          "complemento": item.complemento,
-          "bairro": item.bairro,
-          "cidade": item.cidade,
-          "estado": item.estado,
-          "cep": item.cep,
-          "rg": item.rg,
-          "nascimento": item.nascimento,
-          "estado_civil": item.estado_civil,
-          "sexo": item.sexo,
-          "telefone": item.telefone,
-          "celular": item.celular,
-        }
-      });      
+      if( item ){
+        this.setState({
+          "nr_maquinas": item ? item.nr_maquinas : 0,
+          payload: {
+            ...this.state.payload,
+            "_id": this.props.match.params._id,
+            "razao_social": item.razao_social,
+            "cnpj": item.cnpj,
+            "email": item.email,
+            "password": item.password,
+            "cpf": item.cpf,
+            "responsavel": item.responsavel,
+            "endereco": item.endereco,
+            "complemento": item.complemento,
+            "bairro": item.bairro,
+            "cidade": item.cidade,
+            "estado": item.estado,
+            "cep": item.cep,
+            "rg": item.rg,
+            "nascimento": item.nascimento,
+            "estado_civil": item.estado_civil,
+            "sexo": item.sexo,
+            "telefone": item.telefone,
+            "celular": item.celular,
+          }
+        });        
+      }else{
+        this.setState({
+          ...this.state
+        });
+      }
     }else{
       this.props.getClienteRequest(this.props.match.params._id);
     }
@@ -106,7 +112,7 @@ class AtualizarCliente extends React.Component {
       const item = nextProps.getClienteSuccess.result;
       
       this.setState({
-        "nr_maquinas": item.nr_maquinas,
+        "nr_maquinas": item ? item.nr_maquinas : 0,
         payload: {
           ...this.state.payload,
           "razao_social": item.razao_social,

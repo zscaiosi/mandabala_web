@@ -5,20 +5,6 @@ import InputField from '../helpers/InputFieldComponent';
 import {postLoginClienteRequest} from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
 
-
-const EnterButton = styled.button`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 350;
-  background-color: purple;
-  border: solid 1px purple;
-  margin: 10px;
-  cursor: pointer;
-`
-
 class LoginOperador extends React.Component {
   constructor(props){
     super(props);

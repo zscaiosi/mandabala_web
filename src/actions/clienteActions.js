@@ -13,6 +13,11 @@ export const POST_CADASTRO = 'POST_CADASTRO';
 export const POST_CADASTRO_SUCCESS = 'POST_CADASTRO_SUCCESS';
 export const POST_CADASTRO_ERROR = 'POST_CADASTRO_ERROR';
 
+export const GET_OPERADORES = "GET_OPERADORES";
+export const GET_OPERADORES_SUCCESS = "GET_OPERADORES_SUCCESS";
+export const GET_OPERADORES_ERROR = "GET_OPERADORES_ERROR";
+
+
 const postLoginCliente = () => {
   return {
     type: POST_LOGIN_CLIENTE
@@ -41,13 +46,13 @@ export const postLoginClienteRequest = (payload) => {
   });
 
  // const request = instance.post(`${api.url}/clientes/login`, payload);
-  const request = instance.post(`http://localhost:8585/clientes/login`, payload);
+  const request = instance.post(`${api.localhost}${api.port}/clientes/login`, payload);
   return dispatch => {
     dispatch(postLoginCliente());
 
     return request.then( response => {
       console.log('POST LOGIN CLIENTE SUCCESS');
-      dispatch(postLoginClienteSuccess(response));
+      dispatch(postLoginClienteSuccess(response.data));
     }).catch( error => {
       console.log('post login cliente error');
       dispatch(postLoginClienteError(error));
@@ -135,12 +140,47 @@ export const postCadastroRequest = (payload) => {
   return (dispatch) => {
     dispatch(postCadastro());
 
-    return instance.post(`${api.url}/clientes/cadastrar`, payload)
+    return instance.post(`${api.localhost}${api.port}/clientes/cadastrar`, payload)
       .then( (response) => {
         dispatch(postCadastroSuccess(response));
       })
       .catch( (error) => {
         dispatch(postCadastroError(error));
       });
+  }
+}
+
+const getOperadores = () => {
+  return {
+    type: GET_OPERADORES
+  }
+}
+
+const getOperadoresSuccess = (response) => {
+  return {
+    type: GET_OPERADORES_SUCCESS,
+    response
+  }
+}
+
+const getOperadoresError = (error) => {
+  return {
+    type: GET_OPERADORES_ERROR,
+    error
+  }
+}
+
+export const getOperadoresRequest = (empresaId) => {
+  const request = axios.get(`${api.localhost}${api.port}/operadores/listar?clienteId=${empresaId}`);
+
+  return dispatch => {
+    dispatch(getOperadores());
+
+    return request.then( (response) => {
+      console.log("GET OPERADORES SUCCESS", response);
+      dispatch(getOperadoresSuccess(response.data));
+    }).catch( (error) => {
+      dispatch(getOperadoresError(error));
+    });
   }
 }

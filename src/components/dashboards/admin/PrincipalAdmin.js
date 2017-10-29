@@ -10,11 +10,11 @@ const InfoDiv = styled.div`
   margin-top: 50px;
 `
 
-class Principal extends Component {
+class PrincipalAdmin extends Component {
 
   componentDidMount(){
-    this.props.getClienteRequest();
-    this.props.getMaquinasRequest();
+    this.props.getClienteRequest(null);
+    this.props.getMaquinasRequest(null);
   }
 
   componentWillReceiveProps(nextProps){
@@ -32,10 +32,10 @@ class Principal extends Component {
           {/* Um painel de informações */}
               <article className="col-6 row-center">
                 <InfoDiv>       
-                  <p style={{ textAlign: 'center' }} >{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.data.length ? this.props.getClienteSuccess.data.length : "---" }</p>
+                  <p style={{ textAlign: 'center' }} >{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results ? this.props.getClienteSuccess.results.length : "---" }</p>
                   &nbsp;
                   <p style={{ textAlign: 'center' }} >
-                    Cliente{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.data.length > 1 ? "s" : null } registrado.
+                    Cliente{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results && this.props.getClienteSuccess.results.length > 1 ? "s" : null } registrado.
                   </p>
                 </InfoDiv>
               </article>
@@ -46,25 +46,24 @@ class Principal extends Component {
           </section>   
         </section>
 
-        {/* <section className="row-section" style={{ marginTop: '10px' }} >
+        <section className="row-section" style={{ marginTop: '10px' }} >
           <section className="panel" style={{ width: '100%', flexDirection: 'row' }} >
-          
+          {/* Um painel de informações */}
               <article className="col-6 row-center">
                 <InfoDiv>       
-                  <p style={{ textAlign: 'center' }} >{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.data.length ? this.props.getClienteSuccess.data.length : "---" }</p>
+                  <p style={{ textAlign: 'center' }} >{ this.props.getMaquinasSuccess !== null && this.props.getMaquinasSuccess.results ? this.props.getMaquinasSuccess.results.length : "---" }</p>
                   &nbsp;
                   <p style={{ textAlign: 'center' }} >
-                    Maquina{ this.props.getMaquinasSuccess !== null && this.props.getMaquinasSuccess.data.length > 1 ? "s" : null } registrada(s).
+                    Maquina{ this.props.getMaquinasSuccess !== null && this.props.getMaquinasSuccess.results && this.props.getMaquinasSuccess.results.length > 1 ? "s" : null } registrada{ this.props.getMaquinasSuccess !== null && this.props.getMaquinasSuccess.results && this.props.getMaquinasSuccess.results.length > 1 ? "s" : null }.
                   </p>
                 </InfoDiv>
               </article>
               <article className="col-6 row-center">
-                ----
+                <Link to="/dashboard/admin/maquinas/cadastro" className="panel-cadastro"> <button >Cadastrar Maquina</button> </Link>
               </article>
-          
+          {/* FIM DO PAINEL */}
           </section>   
-        </section>      */}
-              
+        </section>
       </span>
     );
   }
@@ -81,4 +80,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {getClienteRequest, getMaquinasRequest})(Principal);
+export default connect(mapStateToProps, {getClienteRequest, getMaquinasRequest})(PrincipalAdmin);

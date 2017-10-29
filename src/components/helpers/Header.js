@@ -9,25 +9,53 @@ const AlignDiv = styled.div`
 
 class Header extends Component {
   render(){
-    return(
-      <section id="header">
-        <AlignDiv>
-          <article className="nav-btn" >
-            <Link to="/dashboard/admin/principal" >Home</Link>
-          </article>
-        </AlignDiv>
-        <AlignDiv>
-          <article className="nav-btn" >
-            <Link to="/dashboard/admin/clientes/" >Clientes</Link>
-          </article>
-        </AlignDiv>
-        <AlignDiv>
-          <article className="nav-btn" >
-            <Link to="/" onClick={ () => window.localStorage.clear() } >Logout</Link>
-          </article>
-        </AlignDiv>            
-      </section>
-    );
+    console.log("PROPS HEADER", this.props)
+    if( this.props.isCliente ){
+      return(
+        <section id="header">
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/dashboard/cliente/principal" >Principal</Link>
+            </article>
+          </AlignDiv>
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/dashboard/cliente/conta/" >Minha Conta</Link>
+            </article>
+          </AlignDiv>
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/dashboard/cliente/operadores" >Operadores</Link>
+            </article>
+          </AlignDiv>          
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/" onClick={ () => window.localStorage.clear() } >Logout</Link>
+            </article>
+          </AlignDiv>            
+        </section>
+      );
+    }else{
+      return(
+        <section id="header">
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/dashboard/admin/principal" >Principal</Link>
+            </article>
+          </AlignDiv>
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/dashboard/admin/clientes/" >Clientes</Link>
+            </article>
+          </AlignDiv>
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/" onClick={ () => window.localStorage.clear() } >Logout</Link>
+            </article>
+          </AlignDiv>            
+        </section>
+      );      
+    }
   }
 }
 

@@ -210,5 +210,64 @@ html{
     text-decoration: none;
     color: white;
   }   
+
+  .maquina-dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px;
+  }
+
+  .maquina-nome{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #8B008B;
+    color: white;
+    padding: 10px;
+  }
+  .maquina-nome p, .maquina-nome b{
+    text-align: center;
+    margin: 0px;
+  }
+  .maquina-infos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    color: #8B008B;
+    padding: 10px;
+  }
+  .maquina-infos b{
+    text-align: center;
+  }
+
+  .grey-text{
+    color: grey;
+    font-size: 13px;
+  }
+
+  .operadores-title{
+    color: #8B008B;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .purple-border{
+    border: solid 0.5px #8B008B;
+  }
+
+  .conta-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .column-start{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
   /* FIM DO MEDIA QUERY */ 
 }

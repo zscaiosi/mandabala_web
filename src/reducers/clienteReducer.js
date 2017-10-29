@@ -7,7 +7,10 @@ import {
   GET_CLIENTE_ERROR,
   POST_CADASTRO,
   POST_CADASTRO_SUCCESS,
-  POST_CADASTRO_ERROR
+  POST_CADASTRO_ERROR,
+  GET_OPERADORES,
+  GET_OPERADORES_SUCCESS,
+  GET_OPERADORES_ERROR
 } from "../actions/clienteActions";
 
 const CLIENTE_STATE = {
@@ -19,7 +22,10 @@ const CLIENTE_STATE = {
   getClienteError: null,
   isPostingCadastro: false,
   postCadastroSuccess: null,
-  postCadastroError: null
+  postCadastroError: null,
+  isGettingOperadores: false,
+  getOperadoresSuccess: null,
+  getOperadoresError: null
 }
 
 export const cliente = (state = CLIENTE_STATE, action) => {
@@ -86,7 +92,28 @@ export const cliente = (state = CLIENTE_STATE, action) => {
           isPostingCadastro: false,
           postCadastroSuccess: action.error,
           postCadastroError: null
-        }            
+        }
+      case GET_OPERADORES:
+        return{
+          ...state,
+          isGettingOperadores: true,
+          getOperadoresSuccess: null,
+          getOperadoresError: null
+        }
+      case GET_OPERADORES_SUCCESS:
+        return{
+          ...state,
+          isGettingOperadores: false,
+          getOperadoresSuccess: action.response,
+          getOperadoresError: null
+        }
+      case GET_OPERADORES_ERROR:
+        return{
+          ...state,
+          isGettingOperadores: false,
+          getOperadoresSuccess: null,
+          getOperadoresError: action.error
+        }                                      
     default:
       return{
         ...state

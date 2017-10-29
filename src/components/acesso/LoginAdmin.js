@@ -1,42 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
 import {postLoginAdminRequest} from '../../actions/adminActions';
 import {Redirect} from 'react-router-dom';
-
-
-const LoginDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: auto;
-  border: solid 1px purple;
-`
-
-const EnterButton = styled.button`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 350;
-  background-color: purple;
-  border: solid 1px purple;
-  margin: 10px;
-  cursor: pointer;
-`
-
-const BadRequestArticle = styled.article`
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  background-color: rgba(255, 100, 150, 0.6);
-  font-size: 16px;
-  color: red;
-  font-weight: 400;
-  border: 0px;
-`
 
 class LoginAdmin extends React.Component {
   constructor(props){

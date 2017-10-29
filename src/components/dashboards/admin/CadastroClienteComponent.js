@@ -50,7 +50,7 @@ class CadastroCliente extends React.Component {
 
     console.log(name, value);
 
-    if( name === "cpf" ){
+    if( name === "cnpj" ){
       this.setState({
         payload: {
           ...this.state.payload,

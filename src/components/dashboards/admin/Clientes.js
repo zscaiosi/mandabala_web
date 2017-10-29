@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import {getClienteRequest} from '../../../actions/clienteActions';
+import {getMaquinasRequest} from '../../../actions/maquinaActions';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
@@ -25,16 +26,17 @@ class Clientes extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if( this.props.getClienteSucces !== null ){
-      
+    if( this.props.isGettingCliente === true && nextProps.getClienteSucces !== null ){
+      this.props.getMaquinasRequest(nextProps.getClienteSucces.results[0]._id);
     }
   }
 
   render(){
+    console.log(this.props)
     return(
       <span>
         {
-          this.props.getClienteSucces !== null ? 
+          this.props.getClienteSucces !== null && this.props.getClienteSucces.results ? 
             this.props.getClienteSucces.results.map( (cliente, i) => {
               return(
                 <section key={i} className="row-section" style={{ marginTop: '10px' }} >
@@ -51,16 +53,10 @@ class Clientes extends Component {
                         <InfoDiv> 
                           <p style={{ textAlign: 'center' }} >
                             Responsável: { cliente.responsavel }
-                          </p>                          
+                          </p>
                         </InfoDiv>
                       </article>
-                      <article className="col-3 row-center">
-                        <InfoDiv> 
-                          <p style={{ textAlign: 'center' }} >
-                            Maquinas: { cliente.nr_maquinas }
-                          </p>                          
-                        </InfoDiv>
-                      </article>      
+    
                       <article className="col-3 row-center">
                         <Link to="/dashboard/admin/clientes/cadastro" className="link"> <button className="clickable-button" style={{margin: '0px'}} >Cadastrar Cliente</button> </Link>
                         <Link to={`/dashboard/admin/clientes/atualizacao/${cliente._id}`} className="link" > <button className="clickable-button" style={{margin: '0px'}} >Atualizar Cliente</button> </Link>
@@ -85,8 +81,9 @@ class Clientes extends Component {
 const mapStateToProps = (state) => {
   return{
     isGettingCliente: state.cliente.isGettingCliente,
-    getClienteSucces: state.cliente.getClienteSuccess
+    getClienteSucces: state.cliente.getClienteSuccess,
+    getMaquinasSuccess: state.maquina.getMaquinasSuccess
   }
 }
 
-export default connect(mapStateToProps, {getClienteRequest})(Clientes);
+export default connect(mapStateToProps, {getClienteRequest, getMaquinasRequest})(Clientes);
