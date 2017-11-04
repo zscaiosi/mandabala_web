@@ -21,6 +21,12 @@ class Conta extends Component {
                   <p><b>Bairro: </b> { this.props.getClienteSuccess.result.bairro }</p>
                   <p><b>Cidade: </b> { this.props.getClienteSuccess.result.cidade }</p>
                   <p><b>Estado: </b> { this.props.getClienteSuccess.result.estado }</p>
+                  <p><b>CEP: </b> { this.props.getClienteSuccess.result.cep }</p>
+                  <p><b>Responsável: </b> { this.props.getClienteSuccess.result.responsavel }</p>
+                  <p><b>CPF: </b> { this.props.getClienteSuccess.result.cpf }</p>
+                  <p><b>RG: </b> { this.props.getClienteSuccess.result.rg }</p>
+                  <p><b>Telefone: </b> { this.props.getClienteSuccess.result.telefone }</p>
+                  <p><b>Celular: </b> { this.props.getClienteSuccess.result.celular }</p>
                 </section>
               :
                 null

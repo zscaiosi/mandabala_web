@@ -151,7 +151,7 @@ class AtualizarCliente extends React.Component {
       }
     });
 
-    const request = instance.put(`${api.localhost}${api.port}/clientes/atualizar`, payload);
+    const request = instance.put(`${api.url}/clientes/atualizar`, payload);
 
     request.then( (response) => {
       this.setState({

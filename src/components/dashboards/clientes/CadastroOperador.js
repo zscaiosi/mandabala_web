@@ -45,7 +45,7 @@ class CadastroOperador extends React.Component{
   postOperador(payload){
     this.setState({ isPosting: true });
 
-    const request = axios.post(`${api.localhost}${api.port}/operadores/cadastrar`, payload);
+    const request = axios.post(`${api.url}/operadores/cadastrar`, payload);
 
     request.then( (response) => {
       this.setState({

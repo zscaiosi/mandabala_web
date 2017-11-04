@@ -35,7 +35,9 @@ class PrincipalAdmin extends Component {
                   <p style={{ textAlign: 'center' }} >{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results ? this.props.getClienteSuccess.results.length : "---" }</p>
                   &nbsp;
                   <p style={{ textAlign: 'center' }} >
-                    Cliente{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results && this.props.getClienteSuccess.results.length > 1 ? "s" : null } registrado.
+                    Cliente{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results && this.props.getClienteSuccess.results.length > 1 ? "s" : null }
+                    &nbsp;
+                    registrado{ this.props.getClienteSuccess !== null && this.props.getClienteSuccess.results && this.props.getClienteSuccess.results.length > 1 ? "s" : null }.
                   </p>
                 </InfoDiv>
               </article>

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
 import {getClienteRequest} from '../../../actions/clienteActions';
 import { getMaquinasRequest } from '../../../actions/maquinaActions';
 import styled from 'styled-components';
+import renaImg from '../../../css/rena.jpg';
 
 const InfoDiv = styled.div`
   display: flex;
@@ -23,19 +23,16 @@ class PrincipalCliente extends Component {
     }
   }
 
-  calculateProfitability(valHr, time){
-    return valHr*time;
-  }
-
   createTimeStamp(rawTime){
-    let auxArray = Number(rawTime/3600).toFixed(2);
-    auxArray = String(auxArray).split(".");
+    let percentageHour = Number(rawTime/3600).toFixed(2);
+    let minutes = (percentageHour*60).toFixed(0);
+    let hours = (minutes/60).toFixed(2);
 
-    return auxArray.length > 1 ? auxArray[0]+ "Hr "+auxArray[1]+" Min " : auxArray[0]+" Hr ";
+    return (hours >= 1 ? hours : 0)+" Hrs "+minutes+" mins ";
   }
 
   calculateIncome(maquina){
-    return Number(maquina.valor_hora)*(Number(maquina.tempo_total_ligada/3600).toFixed(2));
+    return Number(maquina.valor_hora)*Number(maquina.tempo_total_ligada/3600).toFixed(2);
   }
 
   render() {
@@ -51,17 +48,25 @@ class PrincipalCliente extends Component {
                     this.props.getMaquinasSuccess ? this.props.getMaquinasSuccess.results.map( (maquina, index) => {
                       return(
                         <section key={index} className="maquina-dashboard" >
-                          <img alt="imagem da maquina" />
+                          <img alt="imagem da maquina" src={renaImg} />
                           <article className="maquina-nome" >
                             <b>{ maquina.modelo }</b>
                             <p>ID: { maquina._id }</p>
                           </article>
                           <article className="maquina-infos" >
                             <b>
-                            <p className="grey-text">Receita Total:</p>
+                              {
+                                maquina.ligada ? 
+                                  <p style={{ color: 'green' }}>Ligada</p>
+                                :
+                                  <p style={{ color: 'red' }}>Desligada</p>
+                              }
+                            </b>                            
+                            <b>
+                              <p className="grey-text">Receita Total:</p>
                               R$ &nbsp;
                               {
-                                this.calculateIncome(maquina)
+                                this.calculateIncome(maquina).toFixed(2)
                               }
                             </b>
                             <b>
@@ -76,16 +81,16 @@ class PrincipalCliente extends Component {
                       );
                     })
                   :
-                    "Buscando..."
+                    <i
+                      style={{ color: "purple" }}
+                      className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>  
+  
                   }                        
 
                 </InfoDiv>
               </article>
           {/* FIM DO PAINEL */}
           </section>
-          <section className="panel" style={{ width: '100%', flexDirection: 'row' }} >
-            <article></article>
-          </section>   
         </section>
               
       </span>

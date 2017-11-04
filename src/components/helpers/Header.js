@@ -35,6 +35,21 @@ class Header extends Component {
           </AlignDiv>            
         </section>
       );
+    }else if( this.props.isOperador ){
+      return(
+        <section id="header">
+          {/* <AlignDiv>
+            <article className="nav-btn" >
+              <Link to={`/dashboard/operador/maquinas/`} >Máquinas</Link>
+            </article>
+          </AlignDiv>  */}
+          <AlignDiv>
+            <article className="nav-btn" >
+              <Link to="/" onClick={ () => {window.localStorage.clear(); window.location.reload()} } >Logout</Link>
+            </article>
+          </AlignDiv>                   
+        </section>        
+      );
     }else{
       return(
         <section id="header">

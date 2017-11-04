@@ -14,7 +14,10 @@ class CadastroMaquina extends React.Component {
         modelo: '',
         valor_hora: '',
         cliente: '',
-        tempo_total_ligada: 0        
+        tempo_total_ligada: 0,
+        ligada: false,
+        periodos_ligada: [],
+        ultimas_vezes_ligada: [] 
       }
     }
 

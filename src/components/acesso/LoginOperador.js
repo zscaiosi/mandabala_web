@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
-import {postLoginClienteRequest} from '../../actions/clienteActions';
+import { postLoginOperadorRequest } from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
 
 class LoginOperador extends React.Component {
@@ -10,7 +10,7 @@ class LoginOperador extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      nome_quiosque: '',
       password: ''
     }
 
@@ -19,19 +19,19 @@ class LoginOperador extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if( this.props.isPostingLoginCliente === true && nextProps.postLoginClienteSuccess !== null ){
-      console.log('success', nextProps.postLoginClienteSuccess);
+    if( this.props.isPostingLoginOperador === true && nextProps.postLoginOperadorSuccess !== null ){
+      console.log('success', nextProps.postLoginOperadorSuccess);
     }
 
-    if( nextProps.postLoginClienteError !== null ){
-      console.log('error', nextProps.postLoginClienteError)
+    if( nextProps.postLoginOperadorError !== null ){
+      console.log('error', nextProps.postLoginOperadorError)
     }
   }
 
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.postLoginClienteRequest(this.state);
+    this.props.postLoginOperadorRequest(this.state);
   }
 
   handleChange(e){
@@ -52,9 +52,9 @@ class LoginOperador extends React.Component {
         <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="Username:"
-            name="username"
-            value={this.state.username}
+            fieldName="Nome do Quiosque:"
+            name="nome_quiosque"
+            value={this.state.nome_quiosque}
             onChange={(e) => this.handleChange(e)}
           />
 
@@ -68,11 +68,11 @@ class LoginOperador extends React.Component {
 
           <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
             <button onClick={(e) => this.handleSubmit(e)}>
-              { this.props.isPostingLoginCliente ? "Aguarde..." : "ENTRAR" }
+              { this.props.isPostingLoginOperador ? "Aguarde..." : "ENTRAR" }
             </button>       
           </span>
 
-          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
+          { this.props.postLoginOperadorSuccess !== null ? <Redirect push to={`/dashboard/operador/maquinas/${this.props.postLoginOperadorSuccess.result.cliente}`} /> : null }
 
         </div>
       </section>
@@ -82,10 +82,10 @@ class LoginOperador extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isPostingLoginCliente: state.cliente.isPostingLoginCliente,
-    postLoginClienteSuccess: state.cliente.postLoginClienteSuccess,
-    postLoginClienteError: state.cliente.postLoginClienteError
+    isPostingLoginOperador: state.cliente.isPostingLoginOperador,
+    postLoginOperadorSuccess: state.cliente.postLoginOperadorSuccess,
+    postLoginOperadorError: state.cliente.postLoginOperadorError
   }
 }
 
-export default connect(mapStateToProps, { postLoginClienteRequest })(LoginOperador);
+export default connect(mapStateToProps, { postLoginOperadorRequest })(LoginOperador);

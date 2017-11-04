@@ -6,6 +6,7 @@ import LoginCliente from './components/acesso/LoginCliente';
 import LoginOperador from './components/acesso/LoginOperador';
 import AdminDashboard from './components/dashboards/admin/AdminDashboard';
 import ClientDashboard from './components/dashboards/clientes/ClientDashboard';
+import OperadorDashboar from './components/dashboards/operadores/OperadorDashboard';
 
 class Home extends React.Component {
 	constructor(props){
@@ -27,6 +28,7 @@ class Home extends React.Component {
 						<Route path="/loginOperador" component={LoginOperador} />
 						<Route path="/dashboard/admin" component={AdminDashboard} />
 						<Route path="/dashboard/cliente" component={ClientDashboard} />
+						<Route path="/dashboard/operador" component={OperadorDashboar} />
 					</Switch>
 				</div>
 			);

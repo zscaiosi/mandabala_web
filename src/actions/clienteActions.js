@@ -17,6 +17,9 @@ export const GET_OPERADORES = "GET_OPERADORES";
 export const GET_OPERADORES_SUCCESS = "GET_OPERADORES_SUCCESS";
 export const GET_OPERADORES_ERROR = "GET_OPERADORES_ERROR";
 
+export const POST_LOGIN_OPERADOR = 'POST_LOGIN_OPERADOR';
+export const POST_LOGIN_OPERADOR_SUCCESS = 'POST_LOGIN_OPERADOR_SUCCESS';
+export const POST_LOGIN_OPERADOR_ERROR = 'POST_LOGIN_OPERADOR_ERROR';
 
 const postLoginCliente = () => {
   return {
@@ -46,7 +49,7 @@ export const postLoginClienteRequest = (payload) => {
   });
 
  // const request = instance.post(`${api.url}/clientes/login`, payload);
-  const request = instance.post(`${api.localhost}${api.port}/clientes/login`, payload);
+  const request = instance.post(`${api.url}/clientes/login`, payload);
   return dispatch => {
     dispatch(postLoginCliente());
 
@@ -90,9 +93,9 @@ export const getClienteRequest = (id=null) => {
   let request = null;
 
   if( id !== null ){
-    request = instance.get(`${api.localhost}${api.port}/clientes/encontrar?_id=${id}`);
+    request = instance.get(`${api.url}/clientes/encontrar?_id=${id}`);
   }else{
-    request = instance.get(`${api.localhost}${api.port}/clientes/listar`);
+    request = instance.get(`${api.url}/clientes/listar`);
   }
 
 
@@ -140,7 +143,7 @@ export const postCadastroRequest = (payload) => {
   return (dispatch) => {
     dispatch(postCadastro());
 
-    return instance.post(`${api.localhost}${api.port}/clientes/cadastrar`, payload)
+    return instance.post(`${api.url}/clientes/cadastrar`, payload)
       .then( (response) => {
         dispatch(postCadastroSuccess(response));
       })
@@ -171,7 +174,7 @@ const getOperadoresError = (error) => {
 }
 
 export const getOperadoresRequest = (empresaId) => {
-  const request = axios.get(`${api.localhost}${api.port}/operadores/listar?clienteId=${empresaId}`);
+  const request = axios.get(`${api.url}/operadores/listar?clienteId=${empresaId}`);
 
   return dispatch => {
     dispatch(getOperadores());
@@ -181,6 +184,40 @@ export const getOperadoresRequest = (empresaId) => {
       dispatch(getOperadoresSuccess(response.data));
     }).catch( (error) => {
       dispatch(getOperadoresError(error));
+    });
+  }
+}
+
+const postLoginOperador = () => {
+  return {
+    type: POST_LOGIN_OPERADOR
+  }
+}
+
+const postLoginOperadorSuccess = (response) => {
+  return {
+    type: POST_LOGIN_OPERADOR_SUCCESS,
+    response
+  }
+}
+
+const postLoginOperadorError = (error) => {
+  return {
+    type: POST_LOGIN_OPERADOR_ERROR,
+    error
+  }
+}
+
+export const postLoginOperadorRequest = (payload) => {
+  const request = axios.post(`${api.url}/operadores/login`, payload);
+
+  return (dispatch) => {
+    dispatch(postLoginOperador());
+
+    return request.then( (response) => {
+      dispatch(postLoginOperadorSuccess(response.data));
+    }).catch( (error) => {
+      dispatch(postLoginOperadorError(error));
     });
   }
 }

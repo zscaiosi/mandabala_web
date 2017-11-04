@@ -33,9 +33,9 @@ export const getMaquinasRequest = (clienteId) => {
   let request = null;
 
   if( clienteId ){
-    request = axios.get(`${api.localhost}${api.port}/maquinas/listar/minhas?cliente=${clienteId}`);
+    request = axios.get(`${api.url}/maquinas/listar/minhas?cliente=${clienteId}`);
   }else{
-    request = axios.get(`${api.localhost}${api.port}/maquinas/listar`);
+    request = axios.get(`${api.url}/maquinas/listar`);
   }
 
   return (dispatch) => {
@@ -74,7 +74,7 @@ const postCadastrarMaquinaError = (error) => {
 }
 
 export const postCadastrarMaquinaRequest = (payload) => {
-  const request = axios.post(`${api.localhost}${api.port}/maquinas/cadastrar`, payload);
+  const request = axios.post(`${api.url}/maquinas/cadastrar`, payload);
 
   return (dispatch) => {
     dispatch(postCadastrarMaquina());

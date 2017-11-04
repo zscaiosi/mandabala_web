@@ -5,6 +5,7 @@ import {getMaquinasRequest} from '../../../actions/maquinaActions';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { api } from '../../../config.json';
 
 const InfoDiv = styled.div`
   display: flex;
@@ -17,18 +18,37 @@ class Clientes extends Component {
     super(props);
 
     this.state = {
-
+      deleteSuccess: false
     }
+
+    this.deleteCliente = this.deleteCliente.bind(this);
   }
 
   componentDidMount(){
     this.props.getClienteRequest(null);
   }
 
-  componentWillReceiveProps(nextProps){
-    if( this.props.isGettingCliente === true && nextProps.getClienteSucces !== null ){
-      this.props.getMaquinasRequest(nextProps.getClienteSucces.results[0]._id);
-    }
+  deleteCliente(id){
+    this.setState({
+      isDeleting: true
+    });
+
+    const request = axios.delete(`${api.url}/clientes/remover/${id}`);
+
+    request.then( (response) => {
+
+      this.setState({
+        isDeleting: false
+      }, () => window.location.reload());
+      
+    }).catch( (error) => {
+
+      this.setState({
+        isDeleting: false,
+        errorDelete: error
+      });
+
+    });
   }
 
   render(){
@@ -45,21 +65,28 @@ class Clientes extends Component {
                       <article className="col-3 row-center">
                         <InfoDiv>       
                           <p style={{ textAlign: 'center' }} >
-                            Razão Social: { cliente.razao_social }
+                            <span style={{color: 'purple'}} >Razão Social:</span> { cliente.razao_social }
                           </p>
                         </InfoDiv>
                       </article>
                       <article className="col-3 row-center">
                         <InfoDiv> 
                           <p style={{ textAlign: 'center' }} >
-                            Responsável: { cliente.responsavel }
+                          <span style={{color: 'purple'}} >Responsável:</span> { cliente.responsavel }
+                          </p>
+                        </InfoDiv>
+                      </article>
+                      <article className="col-3 row-center">
+                        <InfoDiv> 
+                          <p style={{ textAlign: 'center' }} >
+                          <span style={{color: 'purple'}} >Máquinas:</span> { cliente.nr_maquinas ? cliente.nr_maquinas : 0 }
                           </p>
                         </InfoDiv>
                       </article>
     
                       <article className="col-3 row-center">
-                        <Link to="/dashboard/admin/clientes/cadastro" className="link"> <button className="clickable-button" style={{margin: '0px'}} >Cadastrar Cliente</button> </Link>
-                        <Link to={`/dashboard/admin/clientes/atualizacao/${cliente._id}`} className="link" > <button className="clickable-button" style={{margin: '0px'}} >Atualizar Cliente</button> </Link>
+                        <button className="clickable-button" style={{margin: '0px'}} ><Link to={`/dashboard/admin/clientes/atualizacao/${cliente._id}`} > Atualizar Cliente</Link></button> 
+                        <button className="clickable-button" style={{margin: '0px'}} onClick={() => this.deleteCliente(cliente._id)} >{ this.state.isDeleting ? "Removendo..." : "Remover Cliente" }</button>
                       </article>                                      
                   {/* FIM DO PAINEL */}
                   </section>   
