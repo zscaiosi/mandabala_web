@@ -72,6 +72,7 @@ class CadastroOperador extends React.Component{
             inputType="text"
             fieldName="Quiosque:"
             name="nome_quiosque"
+            maxLength={25}
             value={this.state.payload.nome_quiosque}
             onChange={(e) => this.handleChange(e)}
           />

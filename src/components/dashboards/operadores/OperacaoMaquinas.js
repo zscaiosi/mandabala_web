@@ -67,10 +67,11 @@ class OperacaoMaquinas extends React.Component{
 
   createTimeStamp(rawTime){
     let percentageHour = Number(rawTime/3600).toFixed(2);
-    let minutes = (percentageHour*60).toFixed(0);
-    let hours = (minutes/60).toFixed(2);
+    let strPercentage = percentageHour.toString().split(".");
+    let hourDigit = strPercentage[0];
+    let minuteDigit = Math.round((Number(strPercentage[1])/100)*60);
 
-    return (hours >= 1 ? hours : 0)+" Hrs "+minutes+" mins ";
+    return (Number(hourDigit) >= 1 ? Number(hourDigit) : 0)+" Hrs "+ minuteDigit +" mins ";
   }  
 
   render(){
