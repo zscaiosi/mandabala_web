@@ -1,31 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
 import {postLoginClienteRequest} from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
-
-
-const LoginDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: auto;
-  border: solid 1px purple;
-`
-
-const EnterButton = styled.button`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  font-weight: 350;
-  background-color: purple;
-  border: solid 1px purple;
-  margin: 10px;
-  cursor: pointer;
-`
 
 class LoginCliente extends React.Component {
   constructor(props){
@@ -45,8 +23,9 @@ class LoginCliente extends React.Component {
       console.log('success', nextProps.postLoginClienteSuccess);
     }
 
-    if( nextProps.postLoginClienteError !== null ){
+    if( this.props.isPostingLoginCliente === true && nextProps.postLoginClienteError !== null ){
       console.log('error', nextProps.postLoginClienteError)
+      alert("Login ou senha inválidos!");
     }
   }
 
@@ -70,11 +49,11 @@ class LoginCliente extends React.Component {
   render(){
     console.log('func', this.props);
     return(
-      <div>
-        <LoginDiv>
+      <section className="row-section">
+        <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="Email:"
+            fieldName="E-mail:"
             name="email"
             value={this.state.email}
             onChange={(e) => this.handleChange(e)}
@@ -88,14 +67,16 @@ class LoginCliente extends React.Component {
             onChange={(e) => this.handleChange(e)}
           />
 
-          <EnterButton onClick={(e) => this.handleSubmit(e)}>
-            ENTRAR
-          </EnterButton>
+          <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
+            <button onClick={(e) => this.handleSubmit(e)}>
+              { this.props.isPostingLoginCliente ? "Aguarde..." : "ENTRAR" }
+            </button>       
+          </span>
 
-          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente" /> : null }
+          { this.props.postLoginClienteSuccess !== null ? <Redirect push to="/dashboard/cliente/principal" /> : null }
 
-        </LoginDiv>
-      </div>
+        </div>
+      </section>
     );
   }
 }

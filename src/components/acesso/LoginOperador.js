@@ -1,16 +1,16 @@
 import React from 'react';
-
+import styled from 'styled-components';
 import {connect} from 'react-redux';
 import InputField from '../helpers/InputFieldComponent';
-import {postLoginAdminRequest} from '../../actions/adminActions';
+import { postLoginOperadorRequest } from '../../actions/clienteActions';
 import {Redirect} from 'react-router-dom';
 
-class LoginAdmin extends React.Component {
+class LoginOperador extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
-      email: '',
+      nome_quiosque: '',
       password: ''
     }
 
@@ -19,20 +19,19 @@ class LoginAdmin extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if( this.props.isPostingLoginAdmin === true && nextProps.postLoginAdminSuccess !== null ){
-      console.log('success', nextProps.postLoginAdminSuccess);
+    if( this.props.isPostingLoginOperador === true && nextProps.postLoginOperadorSuccess !== null ){
+      console.log('success', nextProps.postLoginOperadorSuccess);
     }
 
-    if( this.props.isPostingLoginAdmin === true && nextProps.postLoginAdminError !== null ){
-      console.log('error', nextProps.postLoginAdminError);
-      alert("Login ou senha inválidos!");
+    if( nextProps.postLoginOperadorError !== null ){
+      console.log('error', nextProps.postLoginOperadorError)
     }
   }
 
   handleSubmit(e){
     e.preventDefault();
 
-    this.props.postLoginAdminRequest({email: this.state.email, password: this.state.password});
+    this.props.postLoginOperadorRequest(this.state);
   }
 
   handleChange(e){
@@ -47,15 +46,15 @@ class LoginAdmin extends React.Component {
   } 
 
   render(){
-    console.log('func', typeof postLoginAdminRequest);
+    console.log('func', this.props);
     return(
       <section className="row-section">
         <div className="panel panel-login">
           <InputField
             inputType="text"
-            fieldName="E-mail:"
-            name="email"
-            value={this.state.email}
+            fieldName="Nome do Quiosque:"
+            name="nome_quiosque"
+            value={this.state.nome_quiosque}
             onChange={(e) => this.handleChange(e)}
           />
 
@@ -68,12 +67,12 @@ class LoginAdmin extends React.Component {
           />
 
           <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }} >
-            <button onClick={(e) => this.handleSubmit(e)} disabled={this.props.isPostingLoginAdmin} >
-              { this.props.isPostingLoginAdmin ? "Aguarde..." : "ENTRAR" }
-            </button>
+            <button onClick={(e) => this.handleSubmit(e)}>
+              { this.props.isPostingLoginOperador ? "Aguarde..." : "ENTRAR" }
+            </button>       
           </span>
 
-          { this.props.postLoginAdminSuccess !== null ? <Redirect push to="/dashboard/admin/principal" /> : null }
+          { this.props.postLoginOperadorSuccess !== null ? <Redirect push to={`/dashboard/operador/maquinas/${this.props.postLoginOperadorSuccess.result.cliente}`} /> : null }
 
         </div>
       </section>
@@ -83,10 +82,10 @@ class LoginAdmin extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isPostingLoginAdmin: state.admin.isPostingLoginAdmin,
-    postLoginAdminSuccess: state.admin.postLoginAdminSuccess,
-    postLoginAdminError: state.admin.postLoginAdminError
+    isPostingLoginOperador: state.cliente.isPostingLoginOperador,
+    postLoginOperadorSuccess: state.cliente.postLoginOperadorSuccess,
+    postLoginOperadorError: state.cliente.postLoginOperadorError
   }
 }
 
-export default connect(mapStateToProps, { postLoginAdminRequest })(LoginAdmin);
+export default connect(mapStateToProps, { postLoginOperadorRequest })(LoginOperador);

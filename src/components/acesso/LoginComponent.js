@@ -2,49 +2,45 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-const ChoicesDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: #ebebeb;
-  width: 100%;
-  height: 500px;
-
-`
-
 const ChoiceCard = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin: 30px;
+  flex-direction: row;
+  margin: 90px 30px 0px 30px;
   height: auto;
+  width: 350px;
+  border-radius: 30px;
+  border: 0.5px solid purple;
 
   a{
     display: flex;
     text-decoration: none;
-    color: red;
+    color: purple;
     height: 50px;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+  }
+  a:hover{
+    color: white;
   }
 `
 
 class Login extends React.Component {
   render(){
     return(
-      <div>
-        <ChoicesDiv>
-          <ChoiceCard>
-            <Link to="/loginCliente" >Sou cliente</Link>
-          </ChoiceCard>
-          <ChoiceCard>
-            <Link to="/loginOperador" >Sou operador</Link>
-          </ChoiceCard>
-          <ChoiceCard>
-            <Link to="/loginAdmin" >Sou administrador</Link>
-          </ChoiceCard>
-        </ChoicesDiv>
-      </div>
+      <section className="row-section">
+        <ChoiceCard className="animated-btn">
+          <Link to="/loginCliente" >Sou cliente</Link>
+        </ChoiceCard>
+        <ChoiceCard className="animated-btn">
+          <Link to="/loginOperador" >Sou operador</Link>
+        </ChoiceCard>
+        <ChoiceCard className="animated-btn">
+          <Link to="/loginAdmin" >Sou administrador</Link>
+        </ChoiceCard>        
+      </section>
     );
   }
 }
